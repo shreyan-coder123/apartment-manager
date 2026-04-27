@@ -109,29 +109,25 @@ const AdminDashboard = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 via-blue-50 to-gray-100">
-      <header className="bg-white/80 backdrop-blur-sm shadow-sm sticky top-0 z-10">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+      <header className="bg-white/90 backdrop-blur-sm shadow-sm sticky top-0 z-10">
+        <div className="px-4 py-3">
           <div className="flex justify-between items-center">
-            <h1 className="text-2xl font-bold text-gray-900">
-              {activeApartment.name}
-              <span className="text-gray-400 font-normal ml-2">Admin Dashboard</span>
-            </h1>
-            <div className="flex items-center space-x-4">
+            <div>
+              <h1 className="text-lg font-bold text-gray-900">{activeApartment.name}</h1>
+              <span className="text-xs text-gray-500">Admin</span>
+            </div>
+            <div className="flex items-center gap-2">
               <button
                 onClick={() => setShowPaymentSettings(!showPaymentSettings)}
-                className="bg-green-100 hover:bg-green-200 text-green-700 font-medium px-4 py-2 rounded-lg text-sm transition-colors flex items-center gap-2"
+                className="bg-green-100 hover:bg-green-200 text-green-700 font-medium px-3 py-2 rounded-lg text-xs"
               >
-                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" />
-                </svg>
-                Payment Settings
+                Pay
               </button>
-              <span className="text-gray-600 text-sm">Logged in as: <span className="font-medium">{activeUser.name}</span></span>
-              <Link 
+              <Link
                 to="/" 
-                className="bg-gray-100 hover:bg-gray-200 text-gray-700 font-medium px-4 py-2 rounded-lg text-sm transition-colors"
+                className="bg-gray-100 hover:bg-gray-200 text-gray-700 font-medium px-3 py-2 rounded-lg text-xs"
               >
-                Switch User
+                Switch
               </Link>
             </div>
           </div>

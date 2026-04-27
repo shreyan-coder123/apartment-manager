@@ -48,28 +48,25 @@ const ResidentDashboard = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 via-blue-50 to-gray-100">
-      <header className="bg-white/80 backdrop-blur-sm shadow-sm sticky top-0 z-10">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+      <header className="bg-white/90 backdrop-blur-sm shadow-sm sticky top-0 z-10">
+        <div className="px-4 py-3">
           <div className="flex justify-between items-center">
-            <h1 className="text-2xl font-bold text-gray-900">
-              {activeApartment.name}
-              <span className="text-gray-400 font-normal ml-2">Resident Dashboard</span>
-            </h1>
-            <div className="flex items-center space-x-4">
-              <span className="text-gray-600 text-sm">Logged in as: <span className="font-medium">{activeUser.name}</span></span>
-              <Link 
-                to="/" 
-                className="bg-gray-100 hover:bg-gray-200 text-gray-700 font-medium px-4 py-2 rounded-lg text-sm transition-colors"
-              >
-                Switch User
-              </Link>
+            <div>
+              <h1 className="text-base font-bold text-gray-900">{activeApartment.name}</h1>
+              <span className="text-xs text-gray-500">Hi, {activeUser.name}</span>
             </div>
+            <Link 
+              to="/" 
+              className="bg-gray-100 hover:bg-gray-200 text-gray-700 font-medium px-3 py-2 rounded-lg text-xs"
+            >
+              Switch
+            </Link>
           </div>
         </div>
       </header>
 
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      <main className="p-4">
+        <div className="grid grid-cols-1 gap-4">
           <motion.section 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
