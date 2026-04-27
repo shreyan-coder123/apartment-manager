@@ -59,10 +59,24 @@ export const createUserDB = async (user) => {
   await setDoc(docRef, user)
 }
 
+export const getUsersByApartmentDB = async (apartmentId) => {
+  if (!firebaseReady) return []
+  const q = query(collection(db, 'users'), where('apartmentId', '==', apartmentId))
+  const snapshot = await getDocs(q)
+  return snapshot.docs.map(d => ({ id: d.id, ...d.data() }))
+}
+
 export const createBillDB = async (bill) => {
   if (!firebaseReady) return
   const docRef = doc(db, 'bills', bill.id)
   await setDoc(docRef, bill)
+}
+
+export const getBillsByApartmentDB = async (apartmentId) => {
+  if (!firebaseReady) return []
+  const q = query(collection(db, 'bills'), where('apartmentId', '==', apartmentId))
+  const snapshot = await getDocs(q)
+  return snapshot.docs.map(d => ({ id: d.id, ...d.data() }))
 }
 
 export const updateBillDB = async (id, data) => {
@@ -82,4 +96,35 @@ export const getMessagesByApartmentDB = async (apartmentId) => {
   const q = query(collection(db, 'messages'), where('apartmentId', '==', apartmentId))
   const snapshot = await getDocs(q)
   return snapshot.docs.map(d => ({ id: d.id, ...d.data() }))
+}
+
+export const subscribeToApartments = (callback) => {
+  if (!firebaseReady) return () => {}
+  return onSnapshot(collection(db, 'apartments'), (snapshot) => {
+    callback(snapshot.docs.map(d => ({ id: d.id, ...d.data() })))
+  })
+}
+
+export const subscribeToUsers = (apartmentId, callback) => {
+  if (!firebaseReady) return () => {}
+  const q = query(collection(db, 'users'), where('apartmentId', '==', apartmentId))
+  return onSnapshot(q, (snapshot) => {
+    callback(snapshot.docs.map(d => ({ id: d.id, ...d.data() })))
+  })
+}
+
+export const subscribeToBills = (apartmentId, callback) => {
+  if (!firebaseReady) return () => {}
+  const q = query(collection(db, 'bills'), where('apartmentId', '==', apartmentId))
+  return onSnapshot(q, (snapshot) => {
+    callback(snapshot.docs.map(d => ({ id: d.id, ...d.data() })))
+  })
+}
+
+export const subscribeToMessages = (apartmentId, callback) => {
+  if (!firebaseReady) return () => {}
+  const q = query(collection(db, 'messages'), where('apartmentId', '==', apartmentId))
+  return onSnapshot(q, (snapshot) => {
+    callback(snapshot.docs.map(d => ({ id: d.id, ...d.data() })))
+  })
 }
