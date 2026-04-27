@@ -9,7 +9,7 @@ const CreateApartment = () => {
   const [numUnits, setNumUnits] = useState('');
   const [error, setError] = useState('');
   const [createdApt, setCreatedApt] = useState(null);
-  const { createApartment, apartments, users } = useApartment();
+  const { createApartment } = useApartment();
   const navigate = useNavigate();
 
   const handleSubmit = (e) => {
@@ -23,7 +23,9 @@ const CreateApartment = () => {
       return;
     }
     const apt = createApartment(name, parseInt(numUnits));
-    setCreatedApt(apt);
+    setTimeout(() => {
+      setCreatedApt(apt);
+    }, 100);
   };
 
   const handleGoToDashboard = () => {
@@ -49,13 +51,13 @@ const CreateApartment = () => {
     URL.revokeObjectURL(url);
   };
 
-  const qrData = JSON.stringify({
+  const qrData = createdApt ? JSON.stringify({
     type: 'apartment',
-    roomCode: createdApt?.roomCode,
-    name: createdApt?.name
-  });
+    roomCode: createdApt.roomCode,
+    name: createdApt.name
+  }) : '';
 
-  if (createdApt) {
+  if (createdApt && createdApt.roomCode) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-50 via-blue-50 to-gray-100 p-6">
         <motion.div 
